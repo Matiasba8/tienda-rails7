@@ -11,6 +11,23 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  #for devise only for development
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  #config.action_mailer.delivery_method = :letter_opener
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'mail.google.com',
+    user_name:            'ventas.panditabelico@gmail.com',
+    password:             'vcvfnijkembztknk',
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 }
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
