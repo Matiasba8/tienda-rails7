@@ -192,12 +192,12 @@ body {
 }
 
 ::selection {
-  background: #7453fc;
+  background: #D8523B;
   color: #fff;
 }
 
 ::-moz-selection {
-  background: #7453fc;
+  background: #D8523B;
   color: #fff;
 }
 
@@ -700,7 +700,7 @@ Header Style
 
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
-    color: #7453fc !important;
+    color: #C3241A !important;
     opacity: 1;
   }
 
