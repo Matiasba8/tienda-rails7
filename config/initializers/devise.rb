@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+class TurboFailureApp < Devise::FailureApp
+  def respond
+    if request_format == :turbo_stream
+      redirect
+    else
+      super
+    end
+  end
+
+  def skip_format?
+    %w(html turbo_stream */*).include? request_format.to_s
+  end
+end
+
+
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -15,7 +31,14 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '0ca73d749ca550c47ef01212af4411a8395e1d0297f2a47eade00c6cd6fbe6128a718aeaf5e21279a6ef69ae9ff3dee486690bee1fcafea09d60c55a51d60dea'
+  config.parent_controller = 'TurboDeviseUserController'
   config.navigational_formats = ['*/*', :html, :turbo_stream]
+
+
+  # Warden configuration
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  end
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
